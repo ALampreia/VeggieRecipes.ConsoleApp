@@ -1,0 +1,20 @@
+﻿    @page
+@model VeggieRecipe.WebApp.Pages.Categories.ListAllModel
+@{
+}
+<head>
+
+</head>
+<body>
+    <main>
+    <a class="nav-link text-dark" asp-area="" asp-page="/Categories/Create">AddCategories</a>
+
+@foreach (var category in Model.CategoryList)
+{
+    <p>@category.CategoryName</p>
+    <a class="nav-link text-dark" asp-area="" asp-page="/Categories/Edit"asp-route-path="category" asp-route-id="@category.Id">Edit</a>
+    <a class="nav-link text-dark" asp-area="" asp-page="/Categories/ListById" asp-route-id="@category.Id">View</a>
+}
+
+    </main>
+</body>

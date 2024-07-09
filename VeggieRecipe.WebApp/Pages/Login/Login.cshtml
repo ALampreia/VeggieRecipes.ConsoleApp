@@ -1,0 +1,27 @@
+﻿@page
+@model VeggieRecipe.WebApp.Pages.Login.LoginModel
+@{
+}
+<body>
+    <main>
+        <div class="container-fluid">
+            <div class="ms-5 me-5 py-3">
+                <form method="Post">
+                    <div class="col-md-4">
+                        <label for="username" class="form-label">Username:</label>
+                        <input type="text" class="form-control" name="username" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="password" class="form-label">Password:</label>
+                        <input type="password" class="form-control" name="password" id="passwordToggle" />
+                        <input type="checkbox" class="me-1" onclick="tooglePassword()">Show Password
+                    </div>
+                    <div class="col-md-4 p-2">
+                        <button class="btn btn-outline-secondary ms-0" type="submit">Login</button>
+                    </div>
+                </form>
+                @TempData["error"]
+            </div>
+        </div>
+    </main>
+</body>

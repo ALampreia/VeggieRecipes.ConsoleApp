@@ -1,0 +1,64 @@
+﻿@page
+@model VeggieRecipe.WebApp.Pages.UserFolder.EditModel
+@{
+}
+<head>
+</head>
+<body>
+    <main>
+        <section>
+            <div class="row">
+                <div class="container">
+                    <div class="text-center py-3">
+                        <h1><i>Edit your Profile</i></h1>
+                        <hr />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <form method="post">
+                <div class="row container-fluid">
+                    <div class="col-lg-6 pt-2 pb-1">
+                        <div>
+                            <input type="hidden" name="userId" value="@Model.SessionUser.Id" />
+                        </div>
+                        <div class="container py-1">
+                            <label for="firstName" class="form-label">First Name:</label>
+                            <input type="text" class="form-control" name="firstName" value="@Model.SessionUser.FirstName" required />
+                        </div>
+                        <div class="container py-1">
+                            <label for="lastName" class="form-label">Last Name:</label>
+                            <input type="text" class="form-control" name="lastName" value="@Model.SessionUser.LastName" required />
+                        </div>
+                        <div class="container py-1">
+                            <label for="username" class="form-label">Username:</label>
+                            <input type="text" class="form-control" name="username" value="@Model.SessionUser.Username" required />
+                        </div>
+                    </div>
+                    <div class="col-lg-6 pt-2 pb-1">
+                        <div class="container py-1">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="text" class="form-control" name="email" value="@Model.SessionUser.Email" required />
+
+                        </div>
+                        <div>
+                                
+                            <input asp-for="SessionUser.IsAdmin" type="hidden" id="admin" name="admin" />
+                        </div>
+                        <div class="container py-1">
+                            <label for="password" class="form-label">Password:</label>
+                            <input type="password" class="form-control" name="password" id="passwordToggle" />
+                            <input type="checkbox" class="me-1" onclick="tooglePassword()">Show Password
+                        </div>
+                        <div class="container py-1">
+                            <button class="btn btn-primary" type="submit">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+

@@ -1,0 +1,38 @@
+﻿@page
+@model VeggieRecipe.WebApp.Pages.UserFolder.CreateModel
+@{
+}
+<body>
+    <main>
+        <div class="container-fluid">
+            <form method="post">
+                <div class="ms-5 me-5 py-3">
+                    <div class="col-md-4">
+                        <label for="firstName" class="form-label">First name</label>
+                        <input type="text" class="form-control" name="firstName" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="lastName" class="form-label">Last name</label>
+                        <input type="text" class="form-control" name="lastName" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" name="username" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" name="password" id="passwordToggle" required>
+                        <input type="checkbox" class="me-1" onclick="tooglePassword()">Show Password
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-primary ms-5" type="submit">Create</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>

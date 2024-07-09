@@ -1,0 +1,19 @@
+﻿@page
+@model VeggieRecipe.WebApp.Pages.Ingredients.ListAllModel
+@{
+}
+<head></head>
+<body>
+    <main>
+<a class="nav-link text-dark" asp-area="" asp-page="/Ingredients/Create">Add Ingredient</a>
+
+@foreach (var ingredient in Model.IngredientList)
+{
+    <p>@ingredient.IngredientName</p>
+    <a class="nav-link text-dark" asp-area="" asp-page="/Ingredients/Edit" asp-route-id="@ingredient.Id">Edit</a>
+    <a class="nav-link text-dark" asp-area="" asp-page="/Ingredients/ListById" asp-route-id="@ingredient.Id">View</a>
+    
+}
+
+    </main>
+</body>

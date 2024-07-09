@@ -1,0 +1,150 @@
+﻿@using VeggieRecipes.Services.CategoryService
+@using VeggieRecipes.Services.DifficultyService
+@inject ICategoryService CategoryService
+@inject IDifficultyService DifficultyService
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - VeggieRecipe</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/VeggieRecipe.WebApp.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/Custom.css" />
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+            <div class="container">
+                <a href="/Index">
+                    <img src="/Images/veggie-recipes-high-resolution-logo-transparent.png" alt="" height="45" width="200" class="img-fluid" />
+                </a>
+
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navmenu">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a href="/Index" class="nav-link">Home</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Recipes by Category</a>
+                            <ul class="dropdown-menu">
+                                @foreach (var category in CategoryService.GetAll())
+                                {
+                                    <li>
+                                        <a class="nav-link text-secondary" asp-area="" asp-page="/Recipes/ListAll" asp-route-idCategory="@category.Id">@category.CategoryName</a>
+                                    </li>
+                                }
+                                <a class="nav-link text-secondary" asp-area="" asp-page="/Recipes/ListAll">View all</a>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Recipes by Difficulty</a>
+                            <ul class="dropdown-menu">
+                                @foreach (var difficulty in DifficultyService.GetAll())
+                                {
+                                    <li>
+                                        <a class="nav-link text-secondary" asp-area="" asp-page="/Recipes/ListAll" asp-route-idDifficulty="@difficulty.Id">@difficulty.DifficultyName</a>
+                                    </li>
+                                }
+                                <a class="nav-link text-secondary" asp-area="" asp-page="/Recipes/ListAll">View all</a>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a href="/About" class="nav-link">About</a></li>
+                        @if (Model.SessionUser != null)
+                        {
+                            @if (Model.SessionUser.IsAdmin == true)
+                            {
+                                <div class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Manage</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="/Admin/Admin" class="nav-link text-black btn btn-outline-secondary ms-2 me-2">Dashboard</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/Admin/AdminUsersManage" class="nav-link text-secondary">Users</a>
+                                        </li>
+                                        <li>
+                                            <a href="/Admin/AdminRecipesManage" class="nav-link align-middle text-secondary">Recipes</a>
+                                        </li>
+                                        <li>
+                                            <a href="/Ingredients/Create" class="nav-link align-middle text-secondary">Ingredients</a>
+                                        </li>
+                                        <li>
+                                            <a href="/Categories/Create" class="nav-link align-middle text-secondary">Categories</a>
+                                        </li>
+                                        <li>
+                                            <a href="/Difficulties/Create" class="nav-link align-middle text-secondary">Difficulties</a>
+                                        </li>
+                                        <li>
+                                            <a href="/Mesuraments/Create" class="nav-link align-middle text-secondary">Measurement</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            }
+                        }
+                    </ul>
+                    <!--Search/Login/register start-->
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-secondary me-2" type="submit">Search</button>
+                    </form>
+
+                    @if (Model.SessionUser == null)
+                    {
+                        <a class="btn btn-outline-secondary ms-2 me-2 pt-md-2" id="login-button" asp-page="/Login/Login">Login</a>
+                        <a class="btn btn-outline-secondary me-2 pt-md-2" id="register-button" asp-page="/UserFolder/Create">Register</a>
+                    }
+                    else
+                    {
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-secondary" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                @Model.SessionUser.Username
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    <a class="btn btn-outline-secondary ms-2 me-2 text-black" asp-page="/Recipes/Create">Create Recipe</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-secondary" asp-page="/Recipes/ListAll" asp-route-userId="@Model.SessionUser.Id">My Recipes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-secondary" asp-page="/FavoriteRecipes/ListAll">Favorites</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-secondary" asp-page="/UserFolder/ListById">Profile</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-secondary" id="login-button" asp-page="/Logout/Logout">Logout</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container-fluid">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="navbar-fixed-bottom text-muted">
+        <div class="container">
+            &copy; 2024 - VeggieRecipe- <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

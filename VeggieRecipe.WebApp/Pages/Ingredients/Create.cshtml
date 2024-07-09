@@ -1,0 +1,25 @@
+﻿@page
+@model VeggieRecipe.WebApp.Pages.Ingredients.CreateModel
+@{
+}
+<head>
+
+</head>
+<body>
+    <main>
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-sm-12">
+                        <form method="post">
+                            <label for="ingredientName" class="form-label">New Ingredient</label>
+                            <input type="text" class="form-control" name="ingredientName" />
+                            <button class="btn btn-outline-secondary ms-0" type="submit">Add</button>
+                            @TempData["duplicated"]
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>

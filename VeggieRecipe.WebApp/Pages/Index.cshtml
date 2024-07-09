@@ -1,0 +1,67 @@
+﻿@page
+@using VeggieRecipes.Services.RatingService
+@inject IRatingService RatingService
+@model IndexModel
+@{
+    ViewData["IndexWelcome"] = "Welcome to Veggie Recipes!";
+}
+
+<head>
+</head>
+<body>
+    <div class="container-fluid bg-light">
+    </div>
+    <main>
+        <div class="container">
+            <section>
+                <div class="py-3">
+                    <h1 class="text-center">@ViewData["IndexWelcome"]</h1>
+                </div>
+                <div class="text-center pt-5 pb-1">
+                    <h3><i>Featured Recipes!</i></h3>
+                    <hr>
+                </div>
+                <div class="container row">
+                    @foreach (var recipe in @Model.RandomRecipe)
+                    {
+                        <div class="col-lg-4 col-md-auto text-center pt-4 mx-auto">
+                            <div class="card h-100 text-center p-4 mb-2 py-4 bg-light">
+                                <img src="/Images/showcase.jpg" alt="pizza dish" height="500" width="414" class="img-fluid mx-auto" />
+                                <div class="card-body">
+                                    <p class="card-title">@recipe.Title</p>
+                                    <p class="card-text"><strong>Rating: </strong>@RatingService.GetAvgRatingValue(recipe.Id)</p>
+                                    <a class="btn btn-outline-secondary" asp-area="" asp-page="/Recipes/ListById" asp-route-id="@recipe.Id">View</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </section>
+            <section>
+                <div class="row">
+                    <div class="text-center py-5">
+                        <div class="container">
+                            <h3><i>Check out the Latest Recipes!</i></h3>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+                <div class="container row">
+                    @foreach (var recipe in @Model.ThreeLastRecipe)
+                    {
+                        <div class="col-lg-4 col-md-auto text-center pt-4 mx-auto">
+                            <div class="card h-100 text-center p-4 mb-2 py-4 bg-light">
+                                <img src="/Images/showcase.jpg" alt="pizza dish" height="500" width="414" class="img-fluid mx-auto" />
+                                <div class="card-body">
+                                    <p class="card-title">@recipe.Title</p>
+                                    <p class="card-text"><strong>Rating: </strong>@RatingService.GetAvgRatingValue(recipe.Id)</p>
+                                    <a class="btn btn-outline-secondary" asp-area="" asp-page="/Recipes/ListById" asp-route-id="@recipe.Id">View</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </section>
+        </div>
+    </main>
+</body>

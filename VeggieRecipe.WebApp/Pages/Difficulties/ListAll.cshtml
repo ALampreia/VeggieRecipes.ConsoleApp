@@ -1,0 +1,22 @@
+﻿@page
+@model VeggieRecipe.WebApp.Pages.Difficulties.ListAllModel
+@{
+}
+<head>
+
+</head>
+<body>
+    <main>
+<a class="nav-link text-dark" asp-area="" asp-page="/Difficulties/Create">Add Difficulties</a>
+
+@foreach(var difficulty in Model.DifficultyList)
+{
+    <p>@difficulty.DifficultyName</p>
+    <a class="nav-link text-dark" asp-area="" asp-page="/Difficulty/Edit" asp-route-path="difficulty" asp-route-id="@difficulty.Id">Edit</a>
+    <a class="nav-link text-dark" asp-area="" asp-page="/Difficulties/ListById" asp-route-id="@difficulty.Id">View</a>
+
+}
+
+    </main>
+</body>
+

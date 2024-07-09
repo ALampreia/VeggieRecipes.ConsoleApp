@@ -1,0 +1,103 @@
+﻿@page
+@model VeggieRecipe.WebApp.Pages.Recipes.EditModel
+@{
+}
+
+<head>
+</head>
+<body>
+    <main>
+        <section>
+            <div class="row">
+                <div class="container">
+                    <div class="text-center py-3">
+                        <h1><i>Edit your Recipe</i></h1>
+                        <hr />
+                    </div>
+                </div>
+            </div>
+        </section>
+        <form method="post">
+            <section>
+                <div class="row container-fluid">
+                    <div class="col-lg-6 pt-2 pb-1">
+
+                        <input asp-for="Recipe.Id" type="hidden" name="id" value="@Model.Recipe.Id"> 
+                        <input asp-for="Recipe.UserId.Id" type="hidden" name="userId" value="@Model.Recipe.UserId.Id" />
+                        <div class="container py-1">
+                            <label for="title" class="form-label">Recipe Name:</label>
+                            <input asp-for="Recipe.Title" type="text" class="form-control" name="title" value="@Model.Recipe.Title" required />
+                        </div>
+                        <div class="container py-1">
+                            <label for="category" class="form-label">Category:</label>
+                            <select class="form-select" name="category" required>
+                                <option value="">Category</option>
+                                @foreach (var category in Model.CategoryList)
+                                {
+                                    <option value="@category.Id">@category.CategoryName</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="container py-1">
+                            <label for="difficulty" class="form-label">Difficulty:</label>
+                            <select class="form-select" name="difficulty" required>
+                                <option value="">Difficulty</option>
+                                @foreach (var difficulty in Model.DifficultyList)
+                                {
+                                    <option value="@difficulty.Id">@difficulty.DifficultyName</option>
+                                }
+                            </select>
+                        </div>
+                        @if (Model.SessionUser.IsAdmin == true)
+                        {
+                            <div class="col-lg-3 pt-2 pb-1">
+                                <div class="container py-1">
+                                    <label for="prepTime" class="form-label">Recipe Time:</label>
+                                    <input asp-for="Recipe.PrepTime" type="text" class="form-control" name="prepTime" aria-describedby="timeHelperBlock" value="@Model.Recipe.PrepTime" required>
+                                    <div id="timeHelperBlock" class="form-text">
+                                        Please, insert the time in minutes.
+                                    </div>
+                                </div>
+                                <div class="container py-1">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" asp-for="@Model.Recipe.IsBlocked" id="blocked" name="blocked" value="1" />
+                                        <label class="form-check-label" for="blocked">
+                                            Blocked
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" asp-for="@Model.Recipe.IsBlocked" id="notBlocked" name="notBlocked" value="0" />
+                                        <label class="form-check-label" for="notBlocked">
+                                            Active
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+
+                            <div class="container py-1">
+                                <label for="prepTime" class="form-label">Recipe Time:</label>
+                                <input asp-for="Recipe.PrepTime" type="text" class="form-control" name="prepTime" aria-describedby="timeHelperBlock" value="@Model.Recipe.PrepTime" required>
+                                <div id="timeHelperBlock" class="form-text">
+                                    Please, insert the time in minutes.
+                                </div>
+                            </div>
+                        }
+                        <div class="container py-1">
+                            <a class="btn btn-outline-secondary" asp-area="" asp-page="/AmountIngredients/Edit" asp-route-id="@Model.Recipe.Id">Add ingredients</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 pt-2 pb-1">
+                        <div class="container py-1">
+                            <label for="prepMethod" class="form-label">Preparation method</label>
+                            <textarea class="form-control" id="prepMethod" name="prepMethod" rows="15" required>@Model.Recipe.PrepMethod</textarea>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </form>
+    </main>
+</body>
+

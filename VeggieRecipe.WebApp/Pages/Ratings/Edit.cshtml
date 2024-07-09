@@ -1,0 +1,96 @@
+﻿@page
+@model VeggieRecipe.WebApp.Pages.Ratings.EditModel
+@{
+}
+<head>
+
+</head>
+<body>
+    <main>
+        <section>
+            <div class="row">
+                <div class="container">
+                    <div class="text-center py-3">
+                        <h1><i>Rate this recipe!</i></h1>
+                        <hr />
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <form method="post">
+                <div class="row container-fluid">
+                    <div class="col-lg-6 pt-2 pb-1">
+                        <div class="col-lg-2 pt-1 pb-1">
+                            <div class="container py-1">
+                                <input type="hidden" name="userId" value="@Model.SessionUser.Id" />
+                                <input type="hidden" name="recipeId" value="@Model.Recipe.Id" />
+
+                                <label for="value" class="form-label">Rating</label>
+                                <select class="form-select" name="value" required>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="pt-2 pb-1">
+                            <div class="container py-1">
+                                <label for="comment" class="form-label">Comments</label>
+                                <textarea class="form-control" id="comment" name="comment" rows="15">@Model.Rating.Comment</textarea>
+                            </div>
+                            <div class="p-2">
+                                <button class="btn btn-outline-secondary ms-3" type="submit">Finish</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--test-->
+                    <div class="col-lg-6 col-sm-12 text-center">
+                        <h1><i>@Model.Recipe.Title</i></h1>
+                        <div class="container text-center">
+                            <div class="row">
+                                <div class="align-content-center text-center align-items-center">
+                                    <p>Rating: <strong>@Model.AvgRatingValue</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="container row">
+                            <span class="col-lg col-sm-12 ms-sm-2 me-sm-2">Category: <strong>@Model.Category.CategoryName</strong></span>
+                            <span class="col-lg col-sm-12 ms-sm-2">Difficulty: <strong>@Model.Difficulty.DifficultyName</strong></span>
+                            <span class="col-lg col-sm-12 ms-sm-2">Time: <strong>@Model.Recipe.PrepTime min</strong></span>
+                        </div>
+                        <hr />
+                        <div class="container-fluid text-center py-1">
+                            <h2 class="py-4"><i><strong>Ingredients</strong></i></h2>
+                            @foreach (var item in Model.ListMesuredIngredients)
+                            {
+                                <span>@item.IngredientName </span>
+                                <span>@item.IngredientQuantity </span>
+                                <span>@item.UsedMesurament </span>
+                                <p></p>
+                            }
+                        </div>
+                        <div class="container-fluid text-center py-2">
+                            <h2 class="py-4"><i><strong>Preparation</strong></i></h2>
+                            <p>@Model.Recipe.PrepMethod</p>
+                        </div>
+                        <div class="container-fluid text-center py-2">
+                            <h2 class="py-4"><i><strong>Comments</strong></i></h2>
+                            @foreach (var rating in Model.RatingList)
+                            {
+
+                                <span>@rating.Comment</span>
+                            }
+                        </div>
+                    </div>
+                    <!--test-->
+                </div>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>

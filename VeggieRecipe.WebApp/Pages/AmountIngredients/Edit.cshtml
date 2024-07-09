@@ -1,0 +1,75 @@
+﻿@page
+@using VeggieRecipes.Services.IngredientService
+@using VeggieRecipes.Services.MesuramentService
+@model VeggieRecipe.WebApp.Pages.AmountIngredients.EditModel
+@inject IIngredientService IngredientService
+@inject IMesuramentService MesuramentService
+@{
+}
+<head>
+
+</head>
+<body>
+    <main>
+        @foreach (var amount in Model.AmountIngredientsByRecipe)
+        {
+            <form method="post">
+
+                <input type="hidden" name="id" value="@amount.Id" />
+                <input type="hidden" name="recipeId" value="@amount.RecipeId.Id" />
+
+                <select name="ingredientId">
+                    <option value="">@IngredientService.GetById(amount.IngredientId.Id).IngredientName</option>
+                    @foreach (var ingredient in Model.IngredientList)
+                    {
+                        <option value="@ingredient.Id">@ingredient.IngredientName</option>
+                    }
+                </select>
+                <select name="mesuramentId">
+                    <option value="">@MesuramentService.GetById(amount.MesuramentId.Id).MesuramentTitle</option>
+                    @foreach (var mesurament in Model.MesuramentList)
+                    {
+                        <option value="@mesurament.Id">@mesurament.MesuramentTitle</option>
+                    }
+                </select>
+                <label for="quantity">Quantity</label>
+                <input type="text" name="quantity" value="@amount.Quantity" />
+            </form>
+        }
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <label class="form-label" for="ingredient">Select Ingredient</label>
+                <select class="form-select" name="ingredient">
+                    <option value="">Select a ingredient</option>
+                    @foreach (var ingredient in Model.IngredientList)
+                    {
+                        <option value="@ingredient.Id">@ingredient.IngredientName</option>
+                    }
+                </select>
+            </div>
+            <div class="container-fluid">
+                <label class="form-label" for="mesuramentId">Mesurament</label>
+                <select class="form-select" name="mesurament">
+                    <option value="">Select one</option>
+                    @foreach (var mesurament in Model.MesuramentList)
+                    {
+                        <option value="@mesurament.Id">@mesurament.MesuramentTitle</option>
+                    }
+                </select>
+            </div>
+            <div class="container-fluid">
+                <label class="form-label" for="quantity">Quantity</label>
+                <input class="form-control" type="text" name="quantity" />
+            </div>
+            <div class="container-fluid">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start py-2">
+                    <button class="input btn btn-outline-secondary">Add ingredient</button>
+                </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a class="nav-link btn btn-success text-white" asp-area="" asp-page="/Recipes/ListAll">Finalize</a>
+                </div>
+            </div>
+        </div>
+        <input type="submit" />
+    </main>
+</body>

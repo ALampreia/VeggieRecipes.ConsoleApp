@@ -1,0 +1,18 @@
+﻿@page
+@model VeggieRecipe.WebApp.Pages.Ingredients.DeleteModel
+@{
+}
+<head>
+
+</head>
+<body>
+    <main>
+        <form method="post">
+            <input type="hidden" name="id" value="@Model.Ingredient.Id" />
+            <input type="hidden" name="ingredientName" value="@Model.Ingredient.IngredientName" />
+            <label for="delete">Type "yes" to DELETE ingredient?</label>
+            <input type="text" name="delete" />
+            <input type="submit" />
+        </form>
+    </main>
+</body>

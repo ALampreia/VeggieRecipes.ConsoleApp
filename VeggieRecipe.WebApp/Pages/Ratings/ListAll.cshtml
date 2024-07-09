@@ -1,0 +1,18 @@
+﻿@page
+@model VeggieRecipe.WebApp.Pages.Ratings.ListAllModel
+@{
+}
+<head>
+
+</head>
+<body>
+    <main>
+@foreach(var rating in Model.RatingList)
+{
+    <p>@rating.Comment</p>
+    <a class="nav-link text-dark" asp-area="" asp-page="/Ratings/Edit" asp-route-id="@rating.Id">Edit</a>
+    <a class="nav-link text-dark" asp-area="" asp-page="/Ratings/ListById" asp-route-id="@rating.Id">View</a>
+}
+
+    </main>
+</body>

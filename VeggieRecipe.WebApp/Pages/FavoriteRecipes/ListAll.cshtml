@@ -1,0 +1,57 @@
+﻿@page
+@using VeggieRecipes.Services.RatingService
+@model VeggieRecipe.WebApp.Pages.FavoriteRecipes.ListAllModel
+@inject IRatingService RatingService;
+@{
+}
+<head>
+
+</head>
+<body>
+    <main>
+        <section>
+            <div class="container">
+                <div class="row py-5">
+                    @foreach (var recipe in Model.RecipeList)
+                    {
+                        <div class="col-lg-3 col-sm-6 pt-4">
+                            <div class="card h-100 text-center p-4 mb-2 py-4 bg-light">
+                                <img src="/Images/sonny-mauricio-yhc4pSbl01A-unsplash.jpg" class="img-fluid" />
+                                <div class="card-body">
+                                    <p class="card-title">@recipe.Title</p>
+                                    @if (Model.SessionUser != null)
+                                    {
+                                        @if (Model.SessionUser.Id == recipe.UserId.Id)
+                                        {
+                                            @if (recipe.IsBlocked == true)
+                                            {
+                                                <p class="card-text"><strong>Status: </strong>Pending validation</p>
+                                            }
+                                            else
+                                            {
+                                                <p class="card-text"><strong>Status: </strong>Active</p>
+                                            }
+                                        }
+                                    }
+                                    <p class="card-text"><strong>Rating: </strong>@RatingService.GetAvgRatingValue(recipe.Id)</p>
+                                    <input type="hidden" name="favoriteId" value="" />
+                                    <a class="btn btn-outline-secondary" asp-area="" asp-page="/Recipes/ListById" asp-route-id="@recipe.Id">View</a>
+                                    <a class="btn btn-outline-secondary" asp-area="" asp-page="/FavoriteRecipes/Delete" asp-route-id="@recipe.Id">Remove from favorites</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </section>
+
+    </main>
+</body>
+@* @foreach (var favoriteRecipe in Model.FavoriteRecipesList)
+        {
+
+            <p>@favoriteRecipe.RecipeId.Id</p>
+            <a class="nav-link text-dark" asp-area="" asp-page="/FavoriteRecipes/Edit" asp-route-id="@favoriteRecipe.Id">Edit</a>
+            <a class="nav-link text-dark" asp-area="" asp-page="/FavoriteRecipes/ListById" asp-route-id="@favoriteRecipe.Id">View</a>
+        } *@

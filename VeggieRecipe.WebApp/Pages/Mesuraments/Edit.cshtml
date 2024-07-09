@@ -1,0 +1,12 @@
+﻿@page
+@model VeggieRecipe.WebApp.Pages.Mesuraments.EditModel
+@{
+}
+<body>
+<form method="post">
+    <input type="hidden" name="id" value="@Model.Mesurament.Id" />
+    <label for="mesuramentTitle">Mesurament Title</label>
+    <input type="text" name="mesuramentTitle" value="@Model.Mesurament.MesuramentTitle" />
+    <input type="submit" />
+</form>
+</body>

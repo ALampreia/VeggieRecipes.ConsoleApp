@@ -1,0 +1,14 @@
+﻿@page
+@model VeggieRecipe.WebApp.Pages.FavoriteRecipes.ListByIdModel
+@{
+}
+<head>
+
+</head>
+<body>
+    <main>
+@Model.FavoriteRecipe.UserId.Id
+<a class="nav-link text-dark" asp-area="" asp-page="/FavoriteRecipes/Delete" asp-route-id="@Model.FavoriteRecipe.Id">Delete</a>
+
+    </main>
+</body>

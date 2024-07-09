@@ -1,0 +1,21 @@
+﻿@page
+@model VeggieRecipe.WebApp.Pages.FavoriteRecipes.EditModel
+@{
+}
+<head>
+
+</head>
+<body>
+    <main>
+<form method="post">
+    <label for="id">FavoriteRecipe.Id</label>
+    <input type="text" name="id" value="@Model.FavoriteRecipe.Id" />
+    <label for="recipeId">recipeId</label>
+    <input type="text" name="recipeId" value="@Model.FavoriteRecipe.RecipeId.Id" />
+    <input type="hidden" name="userId" value="@Model.SessionUser.Id" />
+    <input type="submit" />
+</form>
+
+    </main>
+</body>
+

@@ -1,0 +1,21 @@
+﻿@page
+@model VeggieRecipe.WebApp.Pages.UserFolder.ListAllModel
+@{
+}
+<head>
+
+</head>
+
+<body>
+    <main>
+        @foreach (var user in Model.UserList)
+        {
+            <p>@user.FirstName</p>
+            <p>@user.LastName</p>
+            <a class="nav-link text-dark" asp-area="" asp-page="/UserFolder/Edit" asp-route-id="@user.Id">Edit</a>
+            <a class="nav-link text-dark" asp-area="" asp-page="/UserFolder/ListById" asp-route-id="@user.Id">View</a>
+        }
+    </main>
+</body>
+
+

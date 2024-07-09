@@ -1,0 +1,94 @@
+﻿@page
+@model VeggieRecipe.WebApp.Pages.Recipes.CreateModel
+@{
+}
+<head>
+</head>
+<body>
+    <main>
+        <form method="post">
+            <section>
+                <div class="row">
+                    <div class="container">
+                        <div class="text-center py-3">
+                            <h1><i>Create your Recipe</i></h1>
+                            <hr />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="row container-fluid">
+                    <div class="col-lg-6 pt-2 pb-1">
+                        <div class="container py-1">
+                            <label for="title" class="form-label">Recipe Name:</label>
+                            <input type="text" class="form-control" name="title" required />
+                        </div>
+                        <div class="container py-1">
+                            <label for="category" class="form-label">Category:</label>
+                            <select class="form-select" name="category" required>
+                                <option value="">Category</option>
+                                @foreach (var category in Model.CategoryList)
+                                {
+                                    <option value="@category.Id">@category.CategoryName</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="container py-1">
+                            <label for="difficulty" class="form-label">Difficulty:</label>
+                            <select class="form-select" name="difficulty" required>
+                                <option value="">Difficulty</option>
+                                @foreach (var difficulty in Model.DifficultyList)
+                                {
+                                    <option value="@difficulty.Id">@difficulty.DifficultyName</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="container py-1">
+                            <label for="prepTime" class="form-label">Recipe Time:</label>
+                            <input type="text" class="form-control" name="prepTime" aria-describedby="timeHelperBlock" required>
+                            <div id="timeHelperBlock" class="form-text">
+                                Please, insert the time in minutes.
+                            </div>
+                        </div>
+                        <div class="container py-1">
+                            <button class="input btn btn-outline-secondary">Go to ingredients</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 pt-2 pb-1">
+                        <div class="container py-1">
+                            <label for="prepMethod" class="form-label">Preparation method</label>
+                            <textarea class="form-control" id="prepMethod" name="prepMethod" rows="15" required placeholder="Step 1: cut the veggies; Step 2: Cook the pasta;"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </form>
+    </main>
+</body>
+
+
+@* <form method="post">
+    <label for="title">Title:</label>
+    <input type="text" name="title" value="">
+    <label for="prepMethod">Preparation Method:</label>
+    <input type="text" name="prepMethod" value="">
+    <label for="prepTime">prepTime:</label>
+    <input type="text" name="prepTime">
+    <select name="category">
+        <option value="">Category</option>
+        @foreach (var category in Model.CategoryList)
+        {
+            <option value="@category.Id">@category.CategoryName</option>
+        }
+    </select>
+    <select name="difficulty">
+        <option value="">Difficulty</option>
+        @foreach (var difficulty in Model.DifficultyList)
+        {
+            <option value="@difficulty.Id">@difficulty.DifficultyName</option>
+        }
+    </select>
+    <input type="submit">
+</form> *@

@@ -1,0 +1,96 @@
+﻿@page
+@using VeggieRecipes.Services.FavoriteRecipeService
+@model VeggieRecipe.WebApp.Pages.Recipes.ListByIdModel
+@inject IFavoriteRecipeService FavoriteRecipeService
+@{
+}
+<head>
+</head>
+<body>
+    <main>
+        <section class="mt-3">
+            <div class="container">
+                <div class="row pt-3 px-2">
+                    <div class="col-lg-6 col-sm-12 text-center">
+                        <h1><i>@Model.Recipe.Title</i></h1>
+                        <div class="container text-center">
+                            <div class="row">
+                                <div class="align-content-center text-center align-items-center">
+                                    <p>Rating: <strong>@Model.AvgRatingValue</strong></p>
+                                    @if (Model.SessionUser != null)
+                                    {
+                                        @if (Model.SessionUser.Id == Model.Recipe.UserId.Id || Model.SessionUser.IsAdmin == true && Model.SessionUser.IsBlocked != true)
+                                        {
+                                            <a class="btn btn-outline-secondary" asp-page="/Recipes/Edit" asp-route-id="@Model.Recipe.Id">Edit recipe</a>
+                                        }
+                                        @if (Model.FavoriteRecipe.Id != 0)
+                                        {
+                                            <a class="btn btn-outline-secondary" asp-area="" asp-page="/FavoriteRecipes/Delete" asp-route-id="@Model.Recipe.Id">Remove to favorites</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-outline-secondary" asp-area="" asp-page="/FavoriteRecipes/Create" asp-route-id="@Model.Recipe.Id">Add to favorites</a>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="container row">
+                            <span class="col-lg col-sm-12 ms-sm-2 me-sm-2">Category: <strong>@Model.Category.CategoryName</strong></span>
+                            <span class="col-lg col-sm-12 ms-sm-2">Difficulty: <strong>@Model.Difficulty.DifficultyName</strong></span>
+                            <span class="col-lg col-sm-12 ms-sm-2">Time: <strong>@Model.Recipe.PrepTime min</strong></span>
+                        </div>
+                        <hr />
+                        <div class="container-fluid text-center py-1">
+                            <h2 class="py-4"><i><strong>Ingredients</strong></i></h2>
+                            @foreach (var item in Model.ListMesuredIngredients)
+                            {
+                                <span>@item.IngredientName </span>
+                                <span>@item.IngredientQuantity </span>
+                                <span>@item.UsedMesurament </span>
+                                <p></p>
+                            }
+                        </div>
+                        <div class="container-fluid text-center py-2">
+                            <h2 class="py-4"><i><strong>Preparation</strong></i></h2>
+                            <p>@Model.Recipe.PrepMethod</p>
+                        </div>
+                        <div class="container-fluid text-center py-2">
+                            <h2 class="py-4"><i><strong>Comments</strong></i></h2>
+                            @foreach (var rating in Model.RatingList)
+                            {
+
+                                <ul>@rating.Comment</ul> <!--Make this a carousel-->
+                            }
+                            <div class="container-fluid text-center ms-1 py-2">
+                                @if (Model.SessionUser != null)
+                                {
+                                    @if (Model.SessionUser.IsBlocked != true)
+                                    {
+                                        <a class="btn btn-outline-secondary" asp-area="" asp-page="/Ratings/Create" asp-route-id="@Model.Recipe.Id">Rate and comment</a>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+                        <img src="/Images/showcase.jpg" alt="Alternate Text" class="img-fluid" />
+                    </div>
+                </div>
+
+        </section>
+    </main>
+</body>
+
+@*
+@Model.Recipe.Title
+<p>@Model.Difficulty.DifficultyName</p>
+<p>@Model.Category.CategoryName</p>
+<p>@Model.Recipe.PrepTime</p>
+<p>@Model.Recipe.PrepMethod</p> *@
+
+
+<!--Trying to show the ingredient list-->
+@*
+<a class="nav-link text-dark" asp-area="" asp-page="/Ratings/Create" asp-route-id="@Model.Recipe.Id">Create Rating</a> *@

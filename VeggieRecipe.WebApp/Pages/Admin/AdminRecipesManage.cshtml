@@ -1,0 +1,83 @@
+﻿@page
+@using System.Text.Json
+@model VeggieRecipe.WebApp.Pages.Admin.AdminRecipesManageModel
+@{
+    ViewData["Title"] = "Manage Recipes";
+}
+<head>
+</head>
+<body>
+    <main>
+        <div class="row">
+
+            <form method="get" id="filterForm">
+                <div class="container-fluid">
+                    <div class="col-lg-2 py-3">
+                        <div class="form-check">
+                            <label class="pb-1" for="FilterOption">Filter by status:</label>
+                            <select class="form-select" asp-for="FilterOption" name="FilterOption">
+                                <option value="All" id="showAll">All</option>
+                                <option value="Blocked" id="showBlocked">Blocked</option>
+                                <option value="NotBlocked" id="showNotBlocked">Active</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2 pt-2 pb-3 ms-4">
+                            <button type="submit" class="btn btn-outline-secondary">Filter</button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+            <form method="post" id="updateBlockedStatusForm">
+                <div class="container-fluid">
+                    <div class="col-12">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn btn-success">Save All</button>
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Prep Time</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var recipe in Model.RecipeList)
+                                {
+                                    <tr>
+                                        <td>@recipe.Title</td>
+                                        <td>@recipe.PrepTime</td>
+                                        <td>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="blockedStatus_@recipe.Id" id="blocked_@recipe.Id" value="Blocked" @(recipe.IsBlocked ? "checked" : "") />
+                                                <label class="form-check-label" for="blocked_@recipe.Id">Blocked</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="blockedStatus_@recipe.Id" id="notBlocked_@recipe.Id" value="Not Blocked" @(!recipe.IsBlocked ? "checked" : "") />
+                                                <label class="form-check-label" for="notBlocked_@recipe.Id">Active</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-outline-secondary ms-2 me-2" asp-page="/Recipes/ListbyId" asp-route-id="@recipe.Id">View</a>
+                                            <a class="btn btn-outline-secondary ms-2 me-2" asp-page="/Recipes/Edit" asp-route-id="@recipe.Id">Edit</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <input type="hidden" name="RecipeList" value="@JsonSerializer.Serialize(Model.RecipeList)" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+@section Scripts {
+    <script>
+        function updateBlockedStatus(recipeId, isBlocked) {
+        }
+    </script>
+}

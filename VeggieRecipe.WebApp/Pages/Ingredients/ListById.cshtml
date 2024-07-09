@@ -1,0 +1,12 @@
+﻿@page
+@model VeggieRecipe.WebApp.Pages.Ingredients.ListByIdModel
+@{
+}
+<head></head>
+<body>
+    <main>
+@Model.Ingredient.IngredientName
+<a class="nav-link text-dark" asp-area="" asp-page="/Ingredients/Delete" asp-route-id="@Model.Ingredient.Id">Delete</a>
+
+    </main>
+</body>

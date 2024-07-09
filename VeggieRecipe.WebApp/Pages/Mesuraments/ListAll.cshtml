@@ -1,0 +1,16 @@
+﻿@page
+@model VeggieRecipe.WebApp.Pages.Mesuraments.ListAllModel
+@{
+}
+<body>
+<a class="nav-link text-dark" asp-area="" asp-page="/Mesuraments/Create">Add Mesurament</a>
+
+
+@foreach (var mesurament in Model.MesuramentsList)
+{
+    <p>@mesurament.MesuramentTitle</p>
+    <a class="nav-link text-dark" asp-area="" asp-page="/Mesuraments/Edit" asp-route-id="@mesurament.Id">Edit</a>
+    <a class="nav-link text-dark" asp-area="" asp-page="/Mesuraments/ListById" asp-route-id="@mesurament.Id">View</a>
+}
+</body>
+

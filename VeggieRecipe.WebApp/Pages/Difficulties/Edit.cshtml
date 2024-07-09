@@ -1,0 +1,18 @@
+﻿@page
+@model VeggieRecipe.WebApp.Pages.Difficulties.EditModel
+@{
+}
+<head>
+
+</head>
+<body>
+    <main>
+<form method="post">
+    <input type ="hidden" name="id" value="@Model.Difficulty.Id"/>
+    <label for="difficultyName">Edit Category</label>
+    <input type="text" name="difficultyName" value="@Model.Difficulty.DifficultyName" />
+    <input type="submit"/>
+</form>
+
+    </main>
+</body>
